@@ -1,0 +1,365 @@
+{
+  "skill_name": "boston-open-data-mcp",
+  "description": "Eval suite for Boston Open Data MCP accuracy. Ground truth collected March 30, 2026.",
+  "evals": [
+    {
+      "id": 1,
+      "level": 1,
+      "category": "structural",
+      "prompt": "Search for 311 datasets in the Boston Open Data portal.",
+      "expected_output": "Returns multiple 311 datasets including years 2022-2024",
+      "expectations": [
+        "Returns at least 4 dataset results",
+        "Results include a dataset for 311 2023 data",
+        "Results include a dataset for 311 2024 data"
+      ]
+    },
+    {
+      "id": 2,
+      "level": 1,
+      "category": "structural",
+      "prompt": "Get the schema for the Boston 311 2023 dataset (resource ID e6013a93-1321-4f2a-bf91-8d8a02f1e62f).",
+      "expected_output": "Returns schema with at least 20 fields including key 311 fields",
+      "expectations": [
+        "Schema contains at least 20 fields",
+        "Schema includes the field 'case_enquiry_id'",
+        "Schema includes the field 'open_dt'",
+        "Schema includes the field 'type'",
+        "Schema includes the field 'neighborhood'",
+        "Schema includes the field 'on_time'",
+        "Schema includes the field 'source'",
+        "Schema includes the field 'department'"
+      ]
+    },
+    {
+      "id": 3,
+      "level": 1,
+      "category": "structural",
+      "prompt": "Search for crime incident report data in the Boston Open Data portal.",
+      "expected_output": "Returns crime incident datasets",
+      "expectations": [
+        "Returns at least 1 dataset result",
+        "Results reference 'Crime Incident Reports' in a dataset name or description"
+      ]
+    },
+    {
+      "id": 4,
+      "level": 1,
+      "category": "structural",
+      "prompt": "Get the schema for the Blue Bike Stations CSV dataset (resource ID 44c931aa-4577-4caa-a8f2-ed1e38263e70).",
+      "expected_output": "Returns schema with station-related fields",
+      "expectations": [
+        "Schema includes the field 'Name'",
+        "Schema includes the field 'District'",
+        "Schema includes the field 'Total_docks'",
+        "Schema includes the field 'Latitude'",
+        "Schema includes the field 'Longitude'"
+      ]
+    },
+    {
+      "id": 5,
+      "level": 2,
+      "category": "population",
+      "stability": "very_stable",
+      "prompt": "How many neighborhoods does Boston have in its neighborhood population dataset?",
+      "expected_output": "24 neighborhoods",
+      "expectations": [
+        "The answer states exactly 24 neighborhoods",
+        "The query uses the population neighborhood dataset (resource b0543358-d03f-4682-bf0c-658ea4573d6f or equivalent)"
+      ]
+    },
+    {
+      "id": 6,
+      "level": 2,
+      "category": "population",
+      "stability": "very_stable",
+      "prompt": "What is the most populous neighborhood in Boston?",
+      "expected_output": "Dorchester with approximately 123,000 residents",
+      "expectations": [
+        "The answer identifies Dorchester as the most populous neighborhood",
+        "The population figure is between 115,000 and 135,000"
+      ]
+    },
+    {
+      "id": 7,
+      "level": 2,
+      "category": "population",
+      "stability": "very_stable",
+      "prompt": "What is the least populous neighborhood in Boston, excluding Harbor Islands?",
+      "expected_output": "Longwood with approximately 5,553 residents",
+      "expectations": [
+        "The answer identifies Longwood as the least populous (excluding Harbor Islands)",
+        "The population figure is between 4,000 and 7,000"
+      ]
+    },
+    {
+      "id": 8,
+      "level": 2,
+      "category": "311_2023",
+      "stability": "immutable",
+      "prompt": "How many total 311 cases were filed in Boston in 2023?",
+      "expected_output": "266,438 total cases",
+      "expectations": [
+        "The answer states exactly 266,438 total cases (or a number within 0.1% of this)"
+      ]
+    },
+    {
+      "id": 9,
+      "level": 2,
+      "category": "311_2023",
+      "stability": "immutable",
+      "prompt": "How many Missed Trash/Recycling/Yard Waste/Bulk Item cases were there in Boston 311 in 2023?",
+      "expected_output": "12,587 cases",
+      "expectations": [
+        "The answer states exactly 12,587 cases (or a number within 0.5% of this)",
+        "The query correctly filters by the 'type' field"
+      ]
+    },
+    {
+      "id": 10,
+      "level": 2,
+      "category": "311_2023",
+      "stability": "immutable",
+      "prompt": "What was the most common 311 request type in Boston in 2023?",
+      "expected_output": "Parking Enforcement with 56,941 cases",
+      "expectations": [
+        "The answer identifies 'Parking Enforcement' as the most common type",
+        "The count is between 56,000 and 58,000"
+      ]
+    },
+    {
+      "id": 11,
+      "level": 2,
+      "category": "311_2023",
+      "stability": "immutable",
+      "prompt": "Which neighborhood had the most 311 cases in Boston in 2023?",
+      "expected_output": "Dorchester with 36,244 cases",
+      "expectations": [
+        "The answer identifies Dorchester as the top neighborhood",
+        "The count is between 35,500 and 37,000"
+      ]
+    },
+    {
+      "id": 12,
+      "level": 2,
+      "category": "311_2023",
+      "stability": "immutable",
+      "prompt": "How many distinct 311 request types exist in the Boston 2023 dataset?",
+      "expected_output": "172 distinct types",
+      "expectations": [
+        "The answer states exactly 172 distinct types"
+      ]
+    },
+    {
+      "id": 13,
+      "level": 2,
+      "category": "311_2023",
+      "stability": "immutable",
+      "prompt": "What percentage of Boston 311 cases in 2023 were resolved on time?",
+      "expected_output": "Approximately 77.3% (206,054 ONTIME out of 266,438)",
+      "expectations": [
+        "The answer states an on-time percentage between 76% and 79%",
+        "The answer mentions ONTIME count near 206,054 or the total near 266,438"
+      ]
+    },
+    {
+      "id": 14,
+      "level": 2,
+      "category": "311_2023",
+      "stability": "immutable",
+      "prompt": "What was the most common 311 source channel in Boston in 2023?",
+      "expected_output": "Citizens Connect App with 141,420 cases",
+      "expectations": [
+        "The answer identifies 'Citizens Connect App' as the top source",
+        "The count is between 140,000 and 143,000"
+      ]
+    },
+    {
+      "id": 15,
+      "level": 2,
+      "category": "311_2023",
+      "stability": "immutable",
+      "prompt": "Which department handled the most 311 cases in Boston in 2023?",
+      "expected_output": "PWDx with 127,398 cases",
+      "expectations": [
+        "The answer identifies PWDx as the top department",
+        "The count is between 126,000 and 129,000"
+      ]
+    },
+    {
+      "id": 16,
+      "level": 2,
+      "category": "crime_2023",
+      "stability": "immutable",
+      "prompt": "How many crime incidents were reported in Boston in 2023?",
+      "expected_output": "78,046 incidents",
+      "expectations": [
+        "The answer states exactly 78,046 incidents (or within 0.5%)"
+      ]
+    },
+    {
+      "id": 17,
+      "level": 2,
+      "category": "crime_2023",
+      "stability": "immutable",
+      "prompt": "How many shooting incidents were reported in Boston in 2023?",
+      "expected_output": "636 shooting incidents",
+      "expectations": [
+        "The answer states exactly 636 shooting incidents"
+      ]
+    },
+    {
+      "id": 18,
+      "level": 2,
+      "category": "crime_2023",
+      "stability": "immutable",
+      "prompt": "Which BPD police district had the most crime incidents in 2023?",
+      "expected_output": "District D4 with 10,408 incidents",
+      "expectations": [
+        "The answer identifies D4 as the district with the most incidents",
+        "The count is between 10,000 and 11,000"
+      ]
+    },
+    {
+      "id": 19,
+      "level": 2,
+      "category": "blue_bikes",
+      "stability": "slowly_growing",
+      "prompt": "How many Blue Bike stations are located in Boston proper?",
+      "expected_output": "Approximately 324 stations (as of March 2026)",
+      "expectations": [
+        "The answer states a number between 290 and 360 for Boston stations",
+        "The query filters by District = 'Boston'"
+      ]
+    },
+    {
+      "id": 20,
+      "level": 2,
+      "category": "blue_bikes",
+      "stability": "slowly_growing",
+      "prompt": "How many municipalities have Blue Bike stations?",
+      "expected_output": "13 municipalities",
+      "expectations": [
+        "The answer states a number between 11 and 15 municipalities"
+      ]
+    },
+    {
+      "id": 21,
+      "level": 2,
+      "category": "permits_2023",
+      "stability": "immutable",
+      "prompt": "How many building permits were issued in Boston in 2023?",
+      "expected_output": "42,075 permits",
+      "expectations": [
+        "The answer states exactly 42,075 permits (or within 0.5%)"
+      ]
+    },
+    {
+      "id": 22,
+      "level": 2,
+      "category": "permits_2023",
+      "stability": "immutable",
+      "prompt": "What was the most common building permit type in Boston in 2023?",
+      "expected_output": "Short Form Bldg Permit with 12,362 issued",
+      "expectations": [
+        "The answer identifies 'Short Form Bldg Permit' (or 'Short Form Building Permit') as the most common",
+        "The count is between 12,000 and 13,000"
+      ]
+    },
+    {
+      "id": 23,
+      "level": 3,
+      "category": "multi_step",
+      "prompt": "What were the top 5 311 request types in Boston in 2023 and how many cases did each have?",
+      "expected_output": "Ranked list: Parking Enforcement (56,941), Requests for Street Cleaning (22,193), Improper Storage of Trash (19,479), CE Collection (16,188), Missed Trash (12,587)",
+      "expectations": [
+        "Parking Enforcement is listed as #1",
+        "Requests for Street Cleaning is listed as #2",
+        "Improper Storage of Trash (Barrels) is listed as #3",
+        "All 5 types are named correctly",
+        "The ranking order is correct"
+      ]
+    },
+    {
+      "id": 24,
+      "level": 3,
+      "category": "multi_step",
+      "prompt": "Which 5 neighborhoods had the most 311 cases in Boston in 2023?",
+      "expected_output": "Dorchester, Roxbury, South Boston/SB Waterfront, Allston/Brighton, East Boston",
+      "expectations": [
+        "Dorchester is listed as #1",
+        "Roxbury is listed as #2",
+        "South Boston (or South Boston / South Boston Waterfront) is listed as #3",
+        "All 5 neighborhoods are named",
+        "The ranking order is correct"
+      ]
+    },
+    {
+      "id": 25,
+      "level": 3,
+      "category": "multi_step",
+      "prompt": "Rank all 311 source channels in Boston 2023 by volume.",
+      "expected_output": "Citizens Connect App, Constituent Call, City Worker App, Self Service, Employee Generated, Maximo Integration",
+      "expectations": [
+        "All 6 source channels are listed",
+        "Citizens Connect App is ranked #1",
+        "Constituent Call is ranked #2",
+        "City Worker App is ranked #3",
+        "The full ranking order is correct"
+      ]
+    },
+    {
+      "id": 26,
+      "level": 3,
+      "category": "multi_step",
+      "prompt": "Which 5 BPD districts had the most crime incidents in 2023?",
+      "expected_output": "D4 (10,408), B2 (10,336), A1 (9,555), C11 (9,073), B3 (7,903)",
+      "expectations": [
+        "D4 is listed as #1",
+        "B2 is listed as #2",
+        "A1 is listed as #3",
+        "All 5 districts are named correctly",
+        "The ranking order is correct"
+      ]
+    },
+    {
+      "id": 27,
+      "level": 4,
+      "category": "cross_dataset",
+      "prompt": "Compare total 311 volume between 2023 and 2024 in Boston. Did it go up or down, and by how much?",
+      "expected_output": "Up from 266,438 to 282,836 — an increase of about 6.2%",
+      "expectations": [
+        "The answer correctly states that 311 volume increased from 2023 to 2024",
+        "The 2023 total is stated as approximately 266,438",
+        "The 2024 total is stated as approximately 282,836",
+        "The percentage increase is stated as approximately 6% (between 5% and 8%)"
+      ]
+    },
+    {
+      "id": 28,
+      "level": 4,
+      "category": "cross_dataset",
+      "prompt": "How did shooting incidents in Boston change from 2023 to 2024?",
+      "expected_output": "Down from 636 to 485 — a decrease of about 23.7%",
+      "expectations": [
+        "The answer correctly states that shootings decreased from 2023 to 2024",
+        "The 2023 count is stated as 636",
+        "The 2024 count is stated as 485",
+        "The percentage decrease is stated as approximately 24% (between 20% and 28%)"
+      ]
+    },
+    {
+      "id": 29,
+      "level": 4,
+      "category": "cross_dataset",
+      "prompt": "What is Dorchester's population and how many 311 cases did it have in 2023? Calculate the per-capita rate per 1,000 residents.",
+      "expected_output": "Population ~123,056; 311 cases 36,244; rate ~294.5 per 1,000",
+      "expectations": [
+        "Dorchester population is stated as approximately 123,000 (between 115,000 and 135,000)",
+        "Dorchester 311 cases in 2023 are stated as approximately 36,244",
+        "A per-capita rate is calculated",
+        "The per-capita rate is approximately 295 per 1,000 (between 250 and 340)"
+      ]
+    }
+  ]
+}

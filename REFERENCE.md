@@ -52,6 +52,38 @@ description: "Quick reference for Boston Open Data datasets, field names, schema
 | Population — Census Tract | Get via `get_dataset_info("2025-boston-population-estimates-census-tract-level")` | Finest granularity |
 | Digital Equity Survey | Get via `get_dataset_info("2024-digital-equity-survey")` | Digital access data |
 
+### Performance Management
+
+#### Budget & Staffing Datasets
+
+| Dataset | Resource ID | Coverage | Use |
+|---------|-------------|----------|-----|
+| Operating Budget (FY26) | `8f2971f0-7a0d-401d-8376-0289e3b810ba` | FY23 actual, FY24 actual, FY25 appropriation, FY26 budget | Planned/appropriated budget by Cabinet → Department → Program → Expense Category |
+| Employee Earnings Report | `29b3544f-752a-4cb1-a6af-a1de153d20a0` | Annual (multiple CSVs per year) | Per-employee comp, overtime, headcount proxy — filter by `DEPARTMENT_NAME` |
+| Checkbook Explorer | `d22fdd5c-7e4c-41b7-a3eb-dfc57a87b245` | FY2011–present, updated regularly | Actual transaction-level spending by dept/account — use for actuals, not appropriations |
+| Discretionary Spending | `e44079a8-b64d-4aa8-8570-6a69398892c3` | FY2019–FY2026 | Vendor/supplier spend by dept — useful for procurement efficiency |
+| CityScore (Full Metrics) | `dd657c02-3443-4c00-8b29-56a40cfe7ee4` | Real-time, timestamped | KPI scores with numerator/denominator — **fallback only** when no direct operational dataset exists |
+
+#### Service Domain → Performance Data Map
+
+| Service Domain | Primary Data Source | Dataset ID / Search Term |
+|---------------|--------------------|-----------------------|
+| Basic services: trash, recycling, streetlights, rodents, potholes, graffiti, abandoned vehicles | 311 (filter by `type` or `service_name`) | See 311 resource IDs in City Services section above |
+| Code enforcement | Code violations | `search_datasets("code violations")` — confirm resource ID before querying |
+| Permitting | Building permits | `approved-building-permits` |
+| Public safety | 911 dispatch + Crime incidents | `911-daily-dispatch-count-by-agency`, `crime-incident-reports` |
+| All other services | CityScore (fallback) | `dd657c02-3443-4c00-8b29-56a40cfe7ee4` |
+
+#### Performance Management Notes
+
+- **Boston Fiscal Year:** July 1 – June 30. FY26 = July 1, 2025 – June 30, 2026.
+- **Budget vs. Actuals:** Operating Budget = appropriated/planned. Checkbook Explorer = actual transactions drawn. Always use the right source for the right question.
+- **Headcount proxy:** Employee Earnings counts payroll entries in a year — not authorized FTE positions. Includes part-year, part-time, transitional employees. Always caveat.
+- **Department name consistency warning:** Department names vary across datasets. "Public Works" may appear as "PWD", "Dept of Public Works", or similar. Always verify the exact string via schema before filtering.
+- **Overtime threshold:** Overtime > 15% of total gross compensation is a staffing stress flag for further investigation, not proof of understaffing.
+
+---
+
 ### Housing & Development
 
 | Dataset ID | Description |

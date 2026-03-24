@@ -732,6 +732,116 @@
     color: var(--slate);
   }
 
+  /* ── EVAL SECTION ── */
+  .eval-meta {
+    display: flex;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .eval-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .eval-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .eval-stat-label {
+    font-size: 0.72rem;
+    color: var(--slate);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .eval-ground-truth {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--green);
+    background: var(--green-pale);
+    border: 1px solid rgba(88,168,87,0.3);
+    padding: 0.3rem 0.7rem;
+    border-radius: 2px;
+    margin-left: auto;
+  }
+
+  .eval-levels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--border-subtle);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .eval-level-card {
+    background: var(--navy-mid);
+    padding: 2rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: background 0.2s;
+  }
+
+  .eval-level-card:hover { background: var(--navy-light); }
+
+  .eval-level-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--green);
+    letter-spacing: 0.1em;
+  }
+
+  .eval-level-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+
+  .eval-level-desc {
+    font-size: 0.82rem;
+    color: var(--slate);
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .eval-level-target {
+    font-size: 0.75rem;
+    color: var(--green);
+    font-family: 'DM Mono', monospace;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .eval-scoring {
+    background: var(--navy-mid);
+    border: 1px solid var(--border-subtle);
+    border-left: 3px solid var(--green);
+    padding: 1.5rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--text-body);
+    line-height: 1.9;
+    border-radius: 0 4px 4px 0;
+    margin-top: 2rem;
+  }
+
+  .eval-scoring .comment { color: var(--slate); }
+  .eval-scoring .val { color: var(--gold-light); }
+  .eval-scoring .label { color: var(--green); }
+
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
@@ -793,6 +903,7 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#data">Data</a></li>
     <li><a href="#methodology">Methodology</a></li>
+    <li><a href="#eval">Eval</a></li>
     <li><a href="#quickstart">Quickstart</a></li>
     <li><a href="https://github.com/sgarcese/Civic-Analytics-Agent-Workflow-Claude-Skill/">GitHub ↗</a></li>
   </ul>
@@ -806,6 +917,7 @@
   <a href="#skills" class="drawer-link">Skills</a>
   <a href="#data" class="drawer-link">Data</a>
   <a href="#methodology" class="drawer-link">Methodology</a>
+  <a href="#eval" class="drawer-link">Eval</a>
   <a href="#quickstart" class="drawer-link">Quickstart</a>
   <a href="https://github.com/sgarcese/Civic-Analytics-Agent-Workflow-Claude-Skill">GitHub ↗</a>
 </div>
@@ -838,7 +950,7 @@
 
   <div class="hero-meta">
     <div class="hero-stat">
-      <span class="hero-stat-num">4</span>
+      <span class="hero-stat-num">5</span>
       <span class="hero-stat-label">Core Skills</span>
     </div>
     <div class="hero-stat">
@@ -846,12 +958,12 @@
       <span class="hero-stat-label">City Data Sources</span>
     </div>
     <div class="hero-stat">
-      <span class="hero-stat-num">5</span>
+      <span class="hero-stat-num">7</span>
       <span class="hero-stat-label">Supporting Files</span>
     </div>
     <div class="hero-stat">
-      <span class="hero-stat-num">4</span>
-      <span class="hero-stat-label">Phase Workflow</span>
+      <span class="hero-stat-num">29</span>
+      <span class="hero-stat-label">MCP Eval Prompts</span>
     </div>
   </div>
 </div>
@@ -861,8 +973,8 @@
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-eyebrow"><span>The Four Phases</span></div>
-  <h2 class="section-title">Frame. Analyze.<br>Communicate. Benchmark.</h2>
+  <div class="section-eyebrow"><span>The Five Phases</span></div>
+  <h2 class="section-title">Frame. Analyze.<br>Communicate. Benchmark. Perform.</h2>
   <p class="section-body">
     Each skill guides Claude through a rigorous phase of city policy work,
     connecting directly to open data APIs via Model Context Protocol servers.
@@ -928,6 +1040,21 @@
         and peer-city learning recommendations.
       </div>
     </div>
+
+    <div class="phase-card">
+      <div class="phase-number">05 — PERFORM</div>
+      <div class="phase-title">Performance Management</div>
+      <span class="phase-tag">Results for America · PerformanceStat</span>
+      <p class="phase-desc">
+        Connect what the city spends and who it employs to what it actually delivers.
+        Cost per outcome, workload per FTE, and overtime signals from budget, payroll,
+        and operational data — 311, permits, violations, and public safety.
+      </p>
+      <div class="phase-output">
+        <strong>Key output:</strong> Performance summary with efficiency ratios,
+        staffing stress indicators, and year-over-year investment trends.
+      </div>
+    </div>
   </div>
 </section>
 
@@ -960,6 +1087,12 @@
       <div class="method-org">InnovateUS</div>
       <div class="method-name">Democratic Engagement</div>
       <div class="method-detail">Accessible public communication, co-design methodology, plain-language standards</div>
+    </div>
+    <div class="method-item">
+      <div class="method-org">Results for America</div>
+      <div class="method-name">PerformanceStat</div>
+      <div class="method-detail">Cost-per-outcome analysis, workload-per-FTE ratios, budget-to-performance trending, staffing efficiency signals</div>
+      <span class="inst-badge">CitiStat tradition</span>
     </div>
   </div>
 </section>
@@ -996,6 +1129,88 @@
       <p class="city-role">Peer city for benchmarking. Larger scale, civic tech leadership, Silicon Valley context. Strong permit and service request data infrastructure.</p>
       <span class="city-badge">San Jose MCP</span>
     </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EVAL -->
+<section id="eval">
+  <div class="section-eyebrow"><span>MCP Quality Assurance</span></div>
+  <h2 class="section-title">29 ground-truth prompts.<br>Four levels of rigor.</h2>
+  <p class="section-body">
+    The Boston Open Data MCP eval suite measures whether Claude retrieves accurate,
+    complete, and structurally correct data across all domains — from schema validation
+    to cross-dataset analytical queries.
+  </p>
+
+  <div class="eval-meta">
+    <div class="eval-stat">
+      <span class="eval-stat-num">29</span>
+      <span class="eval-stat-label">Total Eval Prompts</span>
+    </div>
+    <div class="eval-stat">
+      <span class="eval-stat-num">4</span>
+      <span class="eval-stat-label">Rigor Levels</span>
+    </div>
+    <div class="eval-stat">
+      <span class="eval-stat-num">6</span>
+      <span class="eval-stat-label">Data Domains</span>
+    </div>
+    <span class="eval-ground-truth">Ground truth · March 30, 2026</span>
+  </div>
+
+  <div class="eval-levels">
+    <div class="eval-level-card">
+      <div class="eval-level-num">LEVEL 1 — STRUCTURAL</div>
+      <div class="eval-level-title">Schema &amp; Discovery</div>
+      <p class="eval-level-desc">
+        Tests dataset discovery and schema retrieval. Can the MCP find the right
+        datasets, return correct field names, and confirm structural integrity?
+        No domain knowledge required — just that the plumbing works.
+      </p>
+      <div class="eval-level-target">Target: 100% · Weight: 15%</div>
+    </div>
+
+    <div class="eval-level-card">
+      <div class="eval-level-num">LEVEL 2 — FACTS</div>
+      <div class="eval-level-title">Single-Dataset Retrieval</div>
+      <p class="eval-level-desc">
+        Tests accurate counts, rankings, and aggregations from individual datasets.
+        Covers 311, crime, building permits, Blue Bikes, and population — all with
+        ground-truth tolerances set against immutable historical records.
+      </p>
+      <div class="eval-level-target">Target: ≥95% · Weight: 35%</div>
+    </div>
+
+    <div class="eval-level-card">
+      <div class="eval-level-num">LEVEL 3 — MULTI-STEP</div>
+      <div class="eval-level-title">Filtering, Grouping &amp; Ranking</div>
+      <p class="eval-level-desc">
+        Tests chained operations: filter by category, aggregate by group, sort, and
+        interpret. Requires the MCP to execute multiple tool calls correctly and
+        return ranked results in the right order.
+      </p>
+      <div class="eval-level-target">Target: ≥90% · Weight: 30%</div>
+    </div>
+
+    <div class="eval-level-card">
+      <div class="eval-level-num">LEVEL 4 — CROSS-DATASET</div>
+      <div class="eval-level-title">Analytical Queries</div>
+      <p class="eval-level-desc">
+        Tests cross-dataset joins: per-capita rates, year-over-year comparisons,
+        and multi-domain synthesis. Requires the MCP to navigate multiple datasets,
+        calculate derived metrics, and reach directionally correct conclusions.
+      </p>
+      <div class="eval-level-target">Target: ≥80% · Weight: 20%</div>
+    </div>
+  </div>
+
+  <div class="eval-scoring">
+    <span class="comment"># Aggregate scoring formula</span><br>
+    <span class="label">Overall</span> = (<span class="val">0.15</span> × L1_Structure) + (<span class="val">0.35</span> × L2_Facts) + (<span class="val">0.30</span> × L3_MultiStep) + (<span class="val">0.20</span> × L4_CrossDataset)<br><br>
+    <span class="comment"># Stability classes: Immutable · Very Stable · Stable · Slowly Growing</span><br>
+    <span class="comment"># See evals.json + EVAL_PLAN.md in the Boston MCP Eval/ directory</span>
   </div>
 </section>
 
@@ -1057,6 +1272,12 @@ learn from the better performers?"</span>
 AND a community fact sheet for
 Roxbury residents from the same
 311 equity analysis."</span>
+
+<span class="comment"># Performance management</span>
+<span class="string">"How much is Boston spending per
+311 trash request resolved on time?
+Are Public Works employees being
+overworked relative to that volume?"</span>
       </div>
     </div>
   </div>
@@ -1076,7 +1297,7 @@ Roxbury residents from the same
     </div>
     <div class="file-item">
       <div class="file-name">CHECKLISTS.md</div>
-      <div class="file-desc">Pre-flight and review checklists for all 4 phases. Catches the most common analytical errors before they reach stakeholders.</div>
+      <div class="file-desc">Pre-flight and review checklists for all 5 phases. Catches the most common analytical errors before they reach stakeholders.</div>
     </div>
     <div class="file-item">
       <div class="file-name">PROMPTS.md</div>
@@ -1084,11 +1305,19 @@ Roxbury residents from the same
     </div>
     <div class="file-item">
       <div class="file-name">REFERENCE.md</div>
-      <div class="file-desc">Full dataset catalog for all 3 cities with resource IDs, field names, and the critical 311 schema change table.</div>
+      <div class="file-desc">Full dataset catalog for all 3 cities with resource IDs, field names, the 311 schema change table, and performance management datasets.</div>
+    </div>
+    <div class="file-item">
+      <div class="file-name">Performance_Management_Skill.md</div>
+      <div class="file-desc">Phase 5 skill: cost-per-outcome, workload-per-FTE, multi-year budget trends, and staffing efficiency — across 311, permits, violations, and public safety data.</div>
     </div>
     <div class="file-item">
       <div class="file-name">EXAMPLE-311-equity.md</div>
       <div class="file-desc">Complete end-to-end worked example: 311 response equity + cross-city benchmark, showing every tool call and analytical decision.</div>
+    </div>
+    <div class="file-item">
+      <div class="file-name">Boston MCP Eval/</div>
+      <div class="file-desc">29-prompt eval suite with ground truth (March 2026). evals.json for automated grading; EVAL_PLAN.md for methodology, scoring formula, and stability classifications.</div>
     </div>
   </div>
 </section>
@@ -1130,6 +1359,7 @@ Roxbury residents from the same
   <ul class="footer-links">
     <li><a href="https://github.com/sgarcese/Civic-Analytics-Agent-Workflow-Claude-Skill">GitHub</a></li>
     <li><a href="https://github.com/sgarcese/Civic-Analytics-Agent-Workflow-Claude-Skill/blob/main/README.md">Docs</a></li>
+    <li><a href="https://github.com/sgarcese/Civic-Analytics-Agent-Workflow-Claude-Skill/blob/main/Boston%20MCP%20Eval/EVAL_PLAN.md">Eval Plan</a></li>
     <li><a href="https://data.boston.gov">Boston Data</a></li>
     <li><a href="https://data.wprdc.org">Pittsburgh Data</a></li>
     <li><a href="https://data.sanjoseca.gov">San Jose Data</a></li>

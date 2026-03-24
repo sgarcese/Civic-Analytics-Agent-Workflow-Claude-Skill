@@ -13,6 +13,7 @@ description: "Master workflow skill for City of Boston policy analysis and civic
 | **2. ANALYZE** | J-PAL, MIT — Evidence-to-Policy | Running numbers, finding patterns, equity analysis | `Analytical_Skill.md` |
 | **3. COMMUNICATE** | The GovLab (NYU) / InnovateUS | Writing memos, briefs, dashboards, community reports | `Communication_Skill.md` |
 | **4. BENCHMARK** | Cross-city comparison using Boston + Pittsburgh + San Jose data | Comparing Boston to peer cities, learning from elsewhere | `Benchmarking_Skill.md` |
+| **5. PERFORM** | Results for America / PerformanceStat (CitiStat) | Budget × staffing × service outcomes: cost-per-outcome, workload-per-FTE, efficiency trends | `Performance_Management_Skill.md` |
 
 > **Always read the relevant sub-skill file before beginning each phase.**
 
@@ -34,6 +35,9 @@ User Request
 │
 ├─ "Compare Boston to other cities / how does Boston rank / what works elsewhere"
 │   → Read Benchmarking_Skill.md → Run Phase 4
+│
+├─ "Budget vs. performance / cost per outcome / workload per FTE / are we getting results / staffing efficiency / how much does it cost to / is the department understaffed / overtime analysis"
+│   → Read Performance_Management_Skill.md → Run Phase 5
 │
 └─ "Full analysis / investigate / give me a recommendation / policy project"
     → Run all relevant phases in sequence
@@ -122,6 +126,7 @@ Key resource IDs: `dff4d804-...` (2024), `9d7c2214-...` (Jan–Oct 2025), `254ad
 | `CHECKLISTS.md` | Pre-flight and review checklists for all phases |
 | `PROMPTS.md` | Example prompts organized by phase and complexity |
 | `REFERENCE.md` | Boston dataset directory, field names, cross-referencing |
+| `Performance_Management_Skill.md` | Results for America / PerformanceStat: budget × staffing × outcomes efficiency analysis |
 | `EXAMPLE-311-equity.md` | Complete worked example: 311 response equity analysis |
 
 ---
