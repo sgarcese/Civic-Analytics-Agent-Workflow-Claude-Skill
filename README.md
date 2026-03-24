@@ -81,7 +81,7 @@ Boston coverage includes: 311 service requests, building permits, public safety,
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/civic-analytics-skills.git
+git clone https://github.com/sgarcese/Civic-Analytics-Agent-Workflow-Claude-Skill.git
 ```
 
 ### 2. Connect your MCP data sources
