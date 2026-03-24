@@ -1,0 +1,27 @@
+# Claude configuration (local settings, memory, hooks)
+.claude/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Environment & secrets
+.env
+.env.*
+*.key
+*.pem
+*.secret
+
+# Editor & IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs & temp files
+*.log
+*.tmp
+*.cache
