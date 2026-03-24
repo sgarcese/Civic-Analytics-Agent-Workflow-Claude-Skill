@@ -1,0 +1,381 @@
+---
+name: output-templates
+description: "Fill-in-the-blank document templates for the six most common city analysis outputs. Replace [bracketed items] with actual content. Delete sections that don't apply."
+---
+
+# Output Templates
+
+---
+
+## Template 1: Executive Decision Memo
+
+**Use when:** A senior leader (Mayor, Chief of Staff, Department Head) needs to decide or approve something.
+**Length:** 1 page maximum. If more detail is needed, attach it.
+**Key principle:** Bottom line up front. They may only read the first paragraph.
+
+```
+TO:     [Name, Title]
+FROM:   [Your Name, Office/Team]
+DATE:   [Date]
+RE:     [Specific, actionable subject — not "311 Analysis"]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BOTTOM LINE
+[1-2 sentences: What we found and what we recommend. Must stand alone —
+if they read nothing else, they should know what to do.]
+
+BACKGROUND
+[2-3 sentences: Why this analysis was done. What triggered it. Scope.]
+
+KEY FINDINGS
+[Finding 1: One sentence of evidence + one sentence of implication.]
+[Finding 2: Same structure.]
+[Finding 3: Same structure.]
+[Optional Finding 4: Only if essential.]
+
+EQUITY IMPACT
+[2-3 sentences: Who is most affected. Any disproportionate burden.
+What the equity implications of acting vs. not acting are.]
+
+RECOMMENDATION
+Specific action:
+  - Who: [Department/person]
+  - By when: [Realistic date]
+  - Resources: [What is needed]
+  - Expected outcome: [Measurable result]
+
+RISKS & ALTERNATIVES
+[1-2 sentences on the main risk. 1 sentence on the primary alternative
+considered and why this recommendation is preferred.]
+
+REQUESTED DECISION
+[One sentence: "Please approve X by [date]" or "Please convene Y to discuss."]
+```
+
+---
+
+## Template 2: Policy Brief (3-5 pages)
+
+**Use when:** Building the evidence case for a policy change; audience is Council, senior staff, or inter-agency group.
+**Key principle:** Evidence-rich but accessible. Support every claim. Lead with the human impact.
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[CLEAR, SPECIFIC TITLE — NOT ACADEMIC]
+
+Prepared by [Name/Office] | [Date]
+Data sources: [List datasets used]
+Analysis period: [Date range covered]
+Data portal: https://data.boston.gov
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EXECUTIVE SUMMARY
+[3-5 sentences: problem + key finding + equity dimension + recommendation.
+Works as a standalone summary for someone who reads nothing else.]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+THE PROBLEM
+[Human-centered description. Start with how people experience it,
+not how the bureaucracy categorizes it.]
+
+[Scope: How widespread? Who is affected? How long has it persisted?]
+
+[Why now: What makes this timely? Recent data? Policy window? Crisis?]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WHAT THE DATA SHOWS
+
+Finding 1: [Clear headline]
+[2-3 sentences of evidence. Reference specific data. N = X records, period = Y.]
+[Table or chart if it strengthens the point.]
+
+Finding 2: [Clear headline]
+[Same structure.]
+
+Finding 3: [Clear headline]
+[Same structure.]
+
+[Keep to 3-5 total findings.]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EQUITY ANALYSIS
+[Who benefits from current arrangements? Who is burdened?]
+[Geographic patterns: Which neighborhoods? What demographic context?]
+[Access patterns: Who is in this data? Who might be missing?]
+[Honest caveat about using geography as demographic proxy.]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WHAT OTHER CITIES HAVE DONE
+[2-3 examples from comparable cities. What they did, what happened,
+what's transferable to Boston. Clearly labeled as preliminary evidence,
+not proven models.]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RECOMMENDATIONS
+
+Recommendation 1: [Specific action]
+  Lead:            [Department/person]
+  Timeline:        [Realistic timeframe]
+  Resources:       [What's needed]
+  Expected impact: [What should change]
+
+Recommendation 2: [If applicable — same structure]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LIMITATIONS & NEXT STEPS
+[What this analysis cannot tell us — be honest.]
+[What additional data would strengthen the conclusions.]
+[Specific next steps if recommendations are approved.]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DATA SOURCES & METHODOLOGY
+[Each dataset: name, ID, date accessed]
+[Key methodological choices: filters, time periods, comparisons]
+Data portal: https://data.boston.gov
+```
+
+---
+
+## Template 3: One-Page Data Summary
+
+**Use when:** Quick reference for a meeting, a data point for a larger report, or a brief overview.
+**Key principle:** Scannable in 60 seconds.
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[TOPIC]: KEY FINDINGS FROM BOSTON OPEN DATA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Data: [Dataset name] | Period: [Dates] | N: [Records]
+Prepared: [Name/Office] | [Date]
+───────────────────────────────────────────────────
+
+THE BIG PICTURE
+[2-3 sentences: the most important takeaway]
+
+───────────────────────────────────────────────────
+
+KEY NUMBERS
+ [Metric 1 label]    [Value]    [Context/benchmark]
+ [Metric 2 label]    [Value]    [Context/benchmark]
+ [Metric 3 label]    [Value]    [Context/benchmark]
+ [Metric 4 label]    [Value]    [Context/benchmark]
+
+───────────────────────────────────────────────────
+
+WHAT STANDS OUT
+• [Finding 1: 1-2 sentences]
+• [Finding 2: 1-2 sentences]
+• [Finding 3: 1-2 sentences]
+
+───────────────────────────────────────────────────
+
+EQUITY DIMENSIONS
+[1 short paragraph on geographic or demographic patterns]
+
+───────────────────────────────────────────────────
+
+WHAT THIS MEANS
+[1 short paragraph connecting findings to policy or action]
+
+───────────────────────────────────────────────────
+
+LIMITATIONS: [2-3 sentences]
+SOURCE: [Dataset name + data.boston.gov] | CONTACT: [email]
+```
+
+---
+
+## Template 4: Community Fact Sheet
+
+**Use when:** Sharing findings with residents, community organizations, or at public meetings.
+**Key principle:** Plain language (8th grade level). Respect. Empowerment. Always include feedback mechanism.
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[PLAIN LANGUAGE HEADLINE THAT MATTERS TO RESIDENTS]
+What this means for [neighborhood/community]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WHAT WE LOOKED AT
+[2-3 sentences. No jargon. No acronyms without definition.]
+
+───────────────────────────────────────────────────
+
+WHAT WE FOUND
+
+📊 [Finding 1 — simple, clear headline]
+   [2-3 sentences explaining what this means for residents]
+
+📊 [Finding 2 — simple, clear headline]
+   [2-3 sentences]
+
+📊 [Finding 3 — simple, clear headline]
+   [2-3 sentences]
+
+───────────────────────────────────────────────────
+
+WHAT THIS MEANS FOR YOU
+[1 paragraph: Practical implications for daily life.
+ How does this affect residents? What should they know?]
+
+───────────────────────────────────────────────────
+
+WHAT'S BEING DONE
+[Specific current or proposed actions. Be honest — don't over-promise.
+ If nothing is decided yet, say so.]
+
+───────────────────────────────────────────────────
+
+WE WANT TO HEAR FROM YOU
+
+→ Does this match your experience?
+→ What are we missing?
+→ What matters most to you about [topic]?
+
+📧 Email: [address]
+📞 Call: [phone number]
+🌐 Online: [survey or feedback URL]
+🗓️ Next meeting: [date, time, location]
+
+───────────────────────────────────────────────────
+
+THE DATA BEHIND THIS
+This analysis uses public data from Boston's Open Data Portal.
+You can see the data yourself: data.boston.gov
+Questions? Contact [name] at [email].
+
+[Available in Spanish / Haitian Creole / Chinese / Vietnamese /
+ Portuguese / Cape Verdean Creole at: [link/location]]
+```
+
+---
+
+## Template 5: Cross-City Benchmark Summary
+
+**Use when:** Presenting peer city comparisons to inform Boston policy.
+**Key principle:** Normalize for population. Label all comparative claims with confidence level.
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CROSS-CITY BENCHMARK: [METRIC] 
+Boston | Pittsburgh | San Jose — [Year/Period]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DATA SOURCES
+ Boston:     [Dataset ID] | data.boston.gov
+ Pittsburgh: [Dataset ID] | data.wprdc.org
+ San Jose:   [Dataset ID] | data.sanjoseca.gov
+
+───────────────────────────────────────────────────
+
+SUMMARY TABLE
+
+ City         Raw Value    Per 10K Residents    Period
+ ─────────────────────────────────────────────────────
+ Boston       [value]      [value]              [dates]
+ Pittsburgh   [value]      [value]              [dates]
+ San Jose     [value]      [value]              [dates]
+
+───────────────────────────────────────────────────
+
+HOW BOSTON COMPARES
+[1-2 sentences using appropriate hedged language:
+ "Boston's [metric] is [X] percentage points [higher/lower] than Pittsburgh's..."]
+
+───────────────────────────────────────────────────
+
+POSSIBLE EXPLANATIONS FOR DIFFERENCES
+[Structural differences, policy differences, data collection differences.
+ Each labeled: "structural factor", "possible policy driver", "data artifact"]
+
+───────────────────────────────────────────────────
+
+WHAT BOSTON CAN LEARN
+[Specific practices worth investigating — labeled "worth exploring," not "proven"]
+
+───────────────────────────────────────────────────
+
+CAVEATS & CONFIDENCE LEVEL
+Metric comparability:    [Equivalent / Approximately equivalent / Partially comparable]
+Data quality alignment:  [High / Moderate / Low for each city]
+Key structural differences: [List]
+
+───────────────────────────────────────────────────
+
+RECOMMENDED NEXT STEPS
+[What additional investigation is needed before acting on these benchmarks]
+```
+
+---
+
+## Template 6: Stakeholder Presentation Structure
+
+**Use when:** Briefing a group (Council, working group, community meeting).
+**Key principle:** One point per slide. Speak the analysis, show the evidence.
+
+```
+Slide 1: TITLE
+ [Title + One-line finding]
+ [Your name, date, data source]
+
+Slide 2: WHY THIS MATTERS
+ [The human hook — connect to resident experience]
+ [One compelling number or pattern]
+
+Slide 3: THE QUESTION WE ASKED
+ [Problem statement in plain language]
+ [What data we used and why]
+
+Slides 4-7: KEY FINDINGS (one per slide)
+ [Finding headline]
+ [Chart or table]
+ [2-3 bullet annotations explaining what to see]
+
+Slide 8: EQUITY LENS
+ [Geographic or demographic patterns]
+ [Who benefits, who is burdened]
+
+Slide 9: PEER CITY CONTEXT (if applicable)
+ [What Pittsburgh or San Jose does differently]
+ [Labeled as preliminary evidence, not proven model]
+
+Slide 10: WHAT WE DON'T KNOW
+ [Key limitations and uncertainties]
+ [What additional investigation is needed]
+
+Slide 11: RECOMMENDATIONS
+ [2-3 specific, actionable recommendations]
+ [Who / what / when for each]
+
+Slide 12: DISCUSSION
+ [2-3 genuine questions for the group]
+ [Questions you actually want input on]
+
+Slide 13: DATA SOURCES
+ [Datasets used, methodology notes]
+ [Contact for follow-up and data access]
+```
+
+---
+
+## Template Usage Notes
+
+- These are structural guides, not rigid formats. Adapt to context.
+- Always apply the quality checklists (CHECKLISTS.md) before delivering any output.
+- When creating actual files, also read the relevant creation skill (docx, pptx, etc.).
+- For community-facing materials: test with at least one person outside government before distribution.
+- The equity section is **not optional** in any template — if you're skipping it, that's a sign it hasn't been done yet.

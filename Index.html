@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Civic Analytics Skills for Claude</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Boston.gov-inspired civic palette */
+    --navy:        #091F2F;
+    --navy-mid:    #0d2b40;
+    --navy-light:  #153a54;
+    --blue:        #288be4;
+    --blue-light:  #5aaff0;
+    --blue-pale:   rgba(40,139,228,0.12);
+    --gold:        #FDB92E;
+    --gold-light:  #fdd06d;
+    --green:       #58A857;
+    --green-pale:  rgba(88,168,87,0.15);
+    --red:         #FB4D42;
+    --slate:       #7a9bb5;
+    --slate-light: #b8d0e4;
+    --white:       #f8fafc;
+    --text-body:   #daeaf8;
+    --text-muted:  #7a9bb5;
+    --border:      rgba(40,139,228,0.22);
+    --border-subtle: rgba(255,255,255,0.07);
+    --shadow:      0 4px 32px rgba(9,31,47,0.5);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--text-body);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── GRID LINES BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(40,139,228,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(40,139,228,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(9,31,47,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--blue);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav-logo::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--slate);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--blue); }
+
+  /* ── HAMBURGER ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+    z-index: 101;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--slate-light);
+    transition: all 0.3s;
+    transform-origin: center;
+  }
+
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── MOBILE NAV DRAWER ── */
+  .nav-drawer {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(9,31,47,0.98);
+    z-index: 99;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+
+  .nav-drawer.open { display: flex; }
+
+  .nav-drawer a {
+    color: var(--slate-light);
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+
+  .nav-drawer a:hover { color: var(--blue); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-eyebrow-line {
+    width: 40px;
+    height: 2px;
+    background: var(--blue);
+  }
+
+  .hero-eyebrow span {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 500;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    color: var(--white);
+    margin-bottom: 0.3em;
+    max-width: 14ch;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--blue);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--slate-light);
+    max-width: 52ch;
+    margin-top: 1.5rem;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--blue);
+    color: #fff;
+    padding: 0.85rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px rgba(40,139,228,0.3);
+  }
+
+  .btn-primary:hover {
+    background: var(--blue-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(40,139,228,0.45);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--border);
+    color: var(--slate-light);
+    padding: 0.85rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    transform: translateY(-2px);
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 3rem;
+    margin-top: 5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border-subtle);
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .hero-stat-label {
+    font-size: 0.78rem;
+    color: var(--slate);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── SECTION ── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-eyebrow span {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 500;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 2px;
+    background: var(--blue);
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 3.5vw, 3rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .section-body {
+    font-size: 1.05rem;
+    color: var(--slate-light);
+    max-width: 60ch;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border-subtle);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ── PHASES ── */
+  .phases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--border-subtle);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .phase-card {
+    background: var(--navy-mid);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: background 0.2s;
+    cursor: default;
+  }
+
+  .phase-card:hover {
+    background: var(--navy-light);
+  }
+
+  .phase-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--blue);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .phase-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--white);
+    font-weight: 700;
+  }
+
+  .phase-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    align-self: flex-start;
+    border-radius: 2px;
+    background: var(--blue-pale);
+  }
+
+  .phase-desc {
+    font-size: 0.9rem;
+    color: var(--slate);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .phase-output {
+    font-size: 0.8rem;
+    color: var(--slate-light);
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .phase-output strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ── METHODOLOGY STRIP ── */
+  .method-strip {
+    background: var(--navy-mid);
+    border: 1px solid var(--border-subtle);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .method-item {
+    padding: 2rem;
+    border-right: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: background 0.2s;
+  }
+
+  .method-item:hover { background: var(--navy-light); }
+
+  .method-item:last-child { border-right: none; }
+
+  .method-org {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+
+  .method-name {
+    font-size: 1rem;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .method-detail {
+    font-size: 0.82rem;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+
+  /* ── INSTITUTION BADGE ── */
+  .inst-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.68rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--gold);
+    background: rgba(253,185,46,0.1);
+    border: 1px solid rgba(253,185,46,0.2);
+    padding: 0.2rem 0.55rem;
+    border-radius: 2px;
+    margin-top: 0.25rem;
+    align-self: flex-start;
+  }
+
+  /* ── DATA SOURCES ── */
+  .cities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .city-card {
+    border: 1px solid var(--border-subtle);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    border-radius: 4px;
+    background: var(--navy-mid);
+  }
+
+  .city-card:hover {
+    border-color: var(--border);
+    box-shadow: 0 4px 24px rgba(40,139,228,0.12);
+  }
+
+  .city-card.primary {
+    border-left: 3px solid var(--blue);
+  }
+
+  .city-flag {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 500;
+  }
+
+  .city-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--white);
+  }
+
+  .city-role {
+    font-size: 0.82rem;
+    color: var(--slate);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .city-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--blue-pale);
+    color: var(--blue-light);
+    font-size: 0.72rem;
+    font-family: 'DM Mono', monospace;
+    padding: 0.3rem 0.7rem;
+    align-self: flex-start;
+    border-radius: 2px;
+    border: 1px solid rgba(40,139,228,0.2);
+  }
+
+  /* ── SUPPORTING FILES ── */
+  .files-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--border-subtle);
+    border: 1px solid var(--border-subtle);
+    margin-top: 2rem;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .file-item {
+    background: var(--navy-mid);
+    padding: 1.5rem;
+    transition: background 0.2s;
+  }
+
+  .file-item:hover { background: var(--navy-light); }
+
+  .file-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .file-desc {
+    font-size: 0.82rem;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+
+  /* ── QUICKSTART ── */
+  .quickstart-block {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    border-radius: 4px;
+  }
+
+  .qs-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 1rem;
+  }
+
+  .qs-step {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .qs-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--blue);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 1.5rem;
+  }
+
+  .qs-step-content h4 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+
+  .qs-step-content p {
+    font-size: 0.82rem;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+
+  .code-block {
+    background: #04131f;
+    border: 1px solid var(--border-subtle);
+    padding: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-body);
+    line-height: 1.8;
+    overflow-x: auto;
+    border-radius: 4px;
+  }
+
+  .code-block .comment { color: var(--slate); }
+  .code-block .string { color: var(--gold-light); }
+  .code-block .keyword { color: var(--blue-light); }
+
+  /* ── PRINCIPLES ── */
+  .principles-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .principle {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1.2rem;
+    border-top: 2px solid var(--blue);
+  }
+
+  .principle-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+
+  .principle-desc {
+    font-size: 0.82rem;
+    color: var(--slate);
+    line-height: 1.65;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border-subtle);
+    padding: 3rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-brand::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+    color: var(--slate);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--blue); }
+
+  .footer-note {
+    font-size: 0.78rem;
+    color: var(--slate);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero > * {
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .hero > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero > *:nth-child(5) { animation-delay: 0.5s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    section { padding: 5rem 1.5rem 3rem; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .quickstart-block { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    .hero-meta { gap: 1.5rem; }
+    .method-strip { grid-template-columns: 1fr 1fr; }
+    .method-item { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+    .method-item:last-child { border-bottom: none; }
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: clamp(2.2rem, 10vw, 3.2rem); }
+    .hero-meta { flex-wrap: wrap; gap: 1.2rem; }
+    .hero-stat-num { font-size: 1.6rem; }
+    .phases-grid { grid-template-columns: 1fr; }
+    .cities-grid { grid-template-columns: 1fr; }
+    .method-strip { grid-template-columns: 1fr; }
+    .principles-list { grid-template-columns: 1fr 1fr; }
+    .files-grid { grid-template-columns: 1fr 1fr; }
+    .hero-actions { flex-direction: column; }
+    .btn-primary, .btn-secondary { justify-content: center; }
+    .section-title { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+  }
+
+  @media (max-width: 400px) {
+    .principles-list { grid-template-columns: 1fr; }
+    .files-grid { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Civic Analytics</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#data">Data</a></li>
+    <li><a href="#methodology">Methodology</a></li>
+    <li><a href="#quickstart">Quickstart</a></li>
+    <li><a href="https://github.com/your-username/civic-analytics-skills">GitHub ↗</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="drawer">
+  <a href="#skills" class="drawer-link">Skills</a>
+  <a href="#data" class="drawer-link">Data</a>
+  <a href="#methodology" class="drawer-link">Methodology</a>
+  <a href="#quickstart" class="drawer-link">Quickstart</a>
+  <a href="https://github.com/your-username/civic-analytics-skills">GitHub ↗</a>
+</div>
+
+<!-- HERO -->
+<div style="max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+<div class="hero">
+  <div class="hero-eyebrow">
+    <div class="hero-eyebrow-line"></div>
+    <span>Claude AI · Open Government Data · Policy Analysis</span>
+  </div>
+
+  <h1>Civic Analytics<br><em>Skills for</em><br>Claude</h1>
+
+  <p class="hero-sub">
+    A framework for evidence-based city policy analysis. Built on world-class methodologies
+    from the Bloomberg Centers at JHU &amp; HKS, J-PAL at MIT, and The GovLab at
+    NYU &amp; Northeastern — connecting Claude AI to live open data from Boston,
+    Pittsburgh, and San Jose.
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://github.com/your-username/civic-analytics-skills" class="btn-primary">
+      View on GitHub ↗
+    </a>
+    <a href="#quickstart" class="btn-secondary">
+      Get started
+    </a>
+  </div>
+
+  <div class="hero-meta">
+    <div class="hero-stat">
+      <span class="hero-stat-num">4</span>
+      <span class="hero-stat-label">Core Skills</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">3</span>
+      <span class="hero-stat-label">City Data Sources</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">5</span>
+      <span class="hero-stat-label">Supporting Files</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">4</span>
+      <span class="hero-stat-label">Phase Workflow</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-eyebrow"><span>The Four Phases</span></div>
+  <h2 class="section-title">Frame. Analyze.<br>Communicate. Benchmark.</h2>
+  <p class="section-body">
+    Each skill guides Claude through a rigorous phase of city policy work,
+    connecting directly to open data APIs via Model Context Protocol servers.
+  </p>
+
+  <div class="phases-grid">
+    <div class="phase-card">
+      <div class="phase-number">01 — FRAME</div>
+      <div class="phase-title">Problem Framing</div>
+      <span class="phase-tag">Bloomberg · JHU &amp; HKS</span>
+      <p class="phase-desc">
+        Stop solving the wrong problem. Scope challenges before touching data,
+        map stakeholders, interrogate assumptions, and write a human-centered
+        problem statement with explicit equity dimensions.
+      </p>
+      <div class="phase-output">
+        <strong>Key output:</strong> A bounded problem statement with success criteria
+        before any data query runs.
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-number">02 — ANALYZE</div>
+      <div class="phase-title">Policy Analysis</div>
+      <span class="phase-tag">J-PAL · MIT</span>
+      <p class="phase-desc">
+        Five levels of evidence — descriptive, diagnostic, equity, counterfactual,
+        synthesis — with explicit claim-strength labeling so analysts never overstate
+        what administrative data can prove.
+      </p>
+      <div class="phase-output">
+        <strong>Key output:</strong> Findings labeled by confidence level with honest
+        limitations and equity analysis.
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-number">03 — COMMUNICATE</div>
+      <div class="phase-title">Communication</div>
+      <span class="phase-tag">GovLab · NYU &amp; Northeastern</span>
+      <p class="phase-desc">
+        Translate analysis into audience-appropriate deliverables: executive memos,
+        policy briefs, community fact sheets, dashboards — each with inclusive design
+        and genuine engagement mechanics.
+      </p>
+      <div class="phase-output">
+        <strong>Key output:</strong> The right document for the right audience,
+        with feedback loops built in.
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-number">04 — BENCHMARK</div>
+      <div class="phase-title">Cross-City Benchmarking</div>
+      <span class="phase-tag">Boston · Pittsburgh · San Jose</span>
+      <p class="phase-desc">
+        Is Boston's problem a Boston problem, or every city's problem? Uses Pittsburgh
+        and San Jose open data MCPs for rigorous cross-city comparison with
+        J-PAL-calibrated claim language.
+      </p>
+      <div class="phase-output">
+        <strong>Key output:</strong> Normalized benchmark table with confidence levels
+        and peer-city learning recommendations.
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- METHODOLOGY -->
+<section id="methodology">
+  <div class="section-eyebrow"><span>Source Methodologies</span></div>
+  <h2 class="section-title">Built on world-class<br>public innovation frameworks</h2>
+
+  <div class="method-strip">
+    <div class="method-item">
+      <div class="method-org">Bloomberg Centers</div>
+      <div class="method-name">Path to Public Innovation</div>
+      <div class="method-detail">Problem framing, stakeholder mapping, assumption interrogation, human-centered scoping</div>
+      <span class="inst-badge">JHU &amp; Harvard Kennedy School</span>
+    </div>
+    <div class="method-item">
+      <div class="method-org">J-PAL · MIT</div>
+      <div class="method-name">Evidence-to-Policy</div>
+      <div class="method-detail">Claim strength labeling, equity analysis, counterfactual thinking, causal humility</div>
+    </div>
+    <div class="method-item">
+      <div class="method-org">The GovLab</div>
+      <div class="method-name">Open Governance</div>
+      <div class="method-detail">Data collaboratives, collective intelligence, consequential engagement, democratic legitimacy</div>
+      <span class="inst-badge">NYU &amp; Northeastern University</span>
+    </div>
+    <div class="method-item">
+      <div class="method-org">InnovateUS</div>
+      <div class="method-name">Democratic Engagement</div>
+      <div class="method-detail">Accessible public communication, co-design methodology, plain-language standards</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- DATA SOURCES -->
+<section id="data">
+  <div class="section-eyebrow"><span>Open Data Sources</span></div>
+  <h2 class="section-title">Three cities.<br>Live MCP connections.</h2>
+  <p class="section-body">
+    Skills connect to open government data via Model Context Protocol servers — no manual
+    downloads or API keys. Data flows directly into analysis on demand.
+  </p>
+
+  <div class="cities-grid">
+    <div class="city-card primary">
+      <div class="city-flag">Primary · Massachusetts</div>
+      <div class="city-name">Boston</div>
+      <p class="city-role">Primary analysis city. Full dataset coverage: 311 service requests, building permits, public safety, demographics, housing, transportation, environment.</p>
+      <span class="city-badge">Boston Open Data MCP</span>
+    </div>
+
+    <div class="city-card">
+      <div class="city-flag">Peer City · Pennsylvania</div>
+      <div class="city-name">Pittsburgh</div>
+      <p class="city-role">Peer city for benchmarking. Similar scale and legacy infrastructure challenges. Hosted by WPRDC — Western PA Regional Data Center.</p>
+      <span class="city-badge">PGH Open Data MCP</span>
+    </div>
+
+    <div class="city-card">
+      <div class="city-flag">Peer City · California</div>
+      <div class="city-name">San Jose</div>
+      <p class="city-role">Peer city for benchmarking. Larger scale, civic tech leadership, Silicon Valley context. Strong permit and service request data infrastructure.</p>
+      <span class="city-badge">San Jose MCP</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- QUICKSTART -->
+<section id="quickstart">
+  <div class="section-eyebrow"><span>Quickstart</span></div>
+  <h2 class="section-title">Start analyzing in<br>three steps</h2>
+
+  <div class="quickstart-block">
+    <div>
+      <div class="qs-label">Setup</div>
+
+      <div class="qs-step">
+        <span class="qs-num">1</span>
+        <div class="qs-step-content">
+          <h4>Clone the repository</h4>
+          <p>Get all skill files and supporting materials from GitHub.</p>
+        </div>
+      </div>
+
+      <div class="qs-step">
+        <span class="qs-num">2</span>
+        <div class="qs-step-content">
+          <h4>Upload the skills to Claude</h4>
+          <p>Add SKILL.md files to your Claude environment. The master orchestrator routes to sub-skills automatically.</p>
+        </div>
+      </div>
+
+      <div class="qs-step">
+        <span class="qs-num">3</span>
+        <div class="qs-step-content">
+          <h4>Connect your MCP data sources</h4>
+          <p>Add Boston, Pittsburgh, and San Jose open data MCP servers to enable live data access.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="qs-label">Example prompts</div>
+      <div class="code-block">
+<span class="comment"># Full workflow</span>
+<span class="string">"Investigate whether Boston's 311
+response times are equitable across
+neighborhoods. Frame the problem,
+analyze the data, compare to
+Pittsburgh, write a brief for
+the Mayor."</span>
+
+<span class="comment"># Cross-city benchmark</span>
+<span class="string">"Compare Boston, Pittsburgh, and
+San Jose on building permit
+approval times. What can Boston
+learn from the better performers?"</span>
+
+<span class="comment"># Communication package</span>
+<span class="string">"Write a 1-page memo for the Mayor
+AND a community fact sheet for
+Roxbury residents from the same
+311 equity analysis."</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FILES -->
+<section>
+  <div class="section-eyebrow"><span>Supporting Materials</span></div>
+  <h2 class="section-title">Everything a government<br>analyst needs</h2>
+
+  <div class="files-grid">
+    <div class="file-item">
+      <div class="file-name">TEMPLATES.md</div>
+      <div class="file-desc">6 fill-in-the-blank output formats: exec memo, policy brief, one-pager, community fact sheet, benchmark summary, presentation deck</div>
+    </div>
+    <div class="file-item">
+      <div class="file-name">CHECKLISTS.md</div>
+      <div class="file-desc">Pre-flight and review checklists for all 4 phases. Catches the most common analytical errors before they reach stakeholders.</div>
+    </div>
+    <div class="file-item">
+      <div class="file-name">PROMPTS.md</div>
+      <div class="file-desc">25+ example prompts organized from simple to expert-level, covering every skill and common government use cases.</div>
+    </div>
+    <div class="file-item">
+      <div class="file-name">REFERENCE.md</div>
+      <div class="file-desc">Full dataset catalog for all 3 cities with resource IDs, field names, and the critical 311 schema change table.</div>
+    </div>
+    <div class="file-item">
+      <div class="file-name">EXAMPLE-311-equity.md</div>
+      <div class="file-desc">Complete end-to-end worked example: 311 response equity + cross-city benchmark, showing every tool call and analytical decision.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRINCIPLES -->
+<section>
+  <div class="section-eyebrow"><span>Design Principles</span></div>
+  <h2 class="section-title">Built for real<br>city work</h2>
+
+  <div class="principles-list">
+    <div class="principle">
+      <div class="principle-title">Rigorous</div>
+      <div class="principle-desc">Every claim labeled with confidence level. Limitations stated, not buried. Administrative data rarely proves causation — the skills say so.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-title">Human-centered</div>
+      <div class="principle-desc">Problems framed around residents' lived experience. Success measured by resident outcomes, not bureaucratic process.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-title">Equity-focused</div>
+      <div class="principle-desc">Every analysis asks who benefits and who is burdened. Asset-based framing required. Geographic proxies noted with their limits.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-title">Transparent</div>
+      <div class="principle-desc">Data sources cited with IDs. Methodology reproducible. Findings shareable as open knowledge for others to verify and build on.</div>
+    </div>
+    <div class="principle">
+      <div class="principle-title">Actionable</div>
+      <div class="principle-desc">Communication designed to create action, not just awareness. Recommendations specify who, what, and when. Feedback loops built in.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">Civic Analytics Skills</span>
+  <ul class="footer-links">
+    <li><a href="https://github.com/your-username/civic-analytics-skills">GitHub</a></li>
+    <li><a href="https://github.com/your-username/civic-analytics-skills/blob/main/README.md">Docs</a></li>
+    <li><a href="https://data.boston.gov">Boston Data</a></li>
+    <li><a href="https://data.wprdc.org">Pittsburgh Data</a></li>
+    <li><a href="https://data.sanjoseca.gov">San Jose Data</a></li>
+    <li><a href="https://github.com/your-username/civic-analytics-skills/blob/main/LICENSE">MIT License</a></li>
+  </ul>
+  <span class="footer-note">Built with Claude · Open source · Public domain data</span>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const drawer = document.getElementById('drawer');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = drawer.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  drawer.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      drawer.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+
+</body>
+</html>

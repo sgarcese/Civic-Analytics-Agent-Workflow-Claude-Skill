@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(brew --version)",
+      "Bash(git --version)"
+    ]
+  }
+}
