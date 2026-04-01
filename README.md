@@ -2,7 +2,7 @@
 
 > **Evidence-based city policy analysis, powered by Claude AI and live open government data.**
 
-A set of Claude Skills that guide analysts through rigorous, equity-focused city policy work — from scoping a problem to publishing findings. Built on world-class public innovation methodologies and connected to live open data from Boston, Pittsburgh, and San Jose via Model Context Protocol (MCP).
+A set of Claude Skills that guide analysts through rigorous, equity-focused city policy work — from scoping a problem to publishing findings. Built on world-class public innovation methodologies and connected to live open data from Boston, San Francisco, Seattle, and Washington DC via Model Context Protocol (MCP).
 
 ---
 
@@ -47,13 +47,14 @@ Accessible public communication, co-design methodology, plain-language standards
 
 Skills connect to open government data via MCP servers — no manual downloads, no API keys. Data flows directly into analysis on demand.
 
-| City | Role | MCP Server |
-|------|------|-----------|
-| **Boston** | Primary analysis city | Boston Open Data MCP |
-| **Pittsburgh** | Peer benchmarking | PGH Open Data MCP (WPRDC) |
-| **San Jose** | Peer benchmarking | San Jose MCP |
+| City | Role | MCP Server | Platform |
+|------|------|-----------|----------|
+| **Boston** | Primary analysis city | Boston Open Data MCP | CKAN/Socrata |
+| **San Francisco** | Peer benchmarking | San Francisco Open Data | Socrata |
+| **Seattle** | Peer benchmarking | Seattle Open Data | Socrata |
+| **Washington DC** | Peer benchmarking | DC Open Data | ArcGIS |
 
-Boston coverage includes: 311 service requests, building permits, public safety, demographics, housing, transportation, and environment datasets.
+Boston coverage includes: 311 service requests, building permits, public safety, demographics, housing, transportation, and environment datasets. SF, Seattle, and DC were selected as peers for comparable population scale, urban density, and data infrastructure depth.
 
 ---
 
@@ -86,7 +87,7 @@ git clone https://github.com/sgarcese/Civic-Analytics-Agent-Workflow-Claude-Skil
 
 ### 2. Connect your MCP data sources
 
-Add the Boston, Pittsburgh, and San Jose open data MCP servers to your Claude environment. See your Claude configuration for MCP setup instructions.
+Add the Boston, San Francisco, Seattle, and DC open data MCP servers to your Claude environment. See your Claude configuration for MCP setup instructions.
 
 ### 3. Upload the skills to Claude
 
@@ -97,7 +98,7 @@ Add the `.md` skill files to your Claude project. The master orchestrator in `SK
 ```
 # Full end-to-end workflow
 "Investigate whether Boston's 311 response times are equitable across
-neighborhoods. Frame the problem, analyze the data, compare to Pittsburgh,
+neighborhoods. Frame the problem, analyze the data, compare to Seattle,
 and write a brief for the Mayor."
 
 # Single-phase analysis
@@ -105,7 +106,7 @@ and write a brief for the Mayor."
 Flag any equity concerns."
 
 # Cross-city benchmark
-"Compare Boston, Pittsburgh, and San Jose on 311 closure rates.
+"Compare Boston, San Francisco, Seattle, and DC on 311 closure rates.
 What can Boston learn from the better performers?"
 
 # Communication package
@@ -152,7 +153,7 @@ The Boston 311 system changed in October 2025. Field names differ between legacy
 
 **[`PROMPTS.md`](PROMPTS.md)** — 25+ example prompts organized from simple single-query requests to complex multi-phase policy projects.
 
-**[`REFERENCE.md`](REFERENCE.md)** — Full dataset catalog for all three cities with resource IDs, field names, and the 311 schema change reference table.
+**[`REFERENCE.md`](REFERENCE.md)** — Full dataset catalog for all four cities with resource IDs, field names, and the 311 schema change reference table.
 
 **[`EXAMPLE-311-equity.md`](EXAMPLE-311-equity.md)** — A complete worked example showing every phase, every tool call, and every analytical decision for a 311 response equity analysis.
 

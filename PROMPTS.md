@@ -15,7 +15,7 @@ description: "Example prompts organized by phase and complexity. Use as template
 | Equity check | "Is there an equity issue with [service]?" | Policy Analysis |
 | Write a memo | "Write a memo to [audience] about [finding]" | Communication |
 | Create a brief | "Create a policy brief on [topic]" | Communication |
-| Compare to peer cities | "How does Boston compare to Pittsburgh on [metric]?" | Benchmarking |
+| Compare to peer cities | "How does Boston compare to San Francisco on [metric]?" | Benchmarking |
 | Full investigation | "Investigate [issue] and recommend action" | All phases |
 
 ---
@@ -171,18 +171,18 @@ audiences."
 
 ### Simple Comparison
 ```
-"How does Boston's 311 on-time rate compare to Pittsburgh's?"
+"How does Boston's 311 on-time rate compare to Seattle's?"
 ```
 → Reads Benchmarking_Skill.md
-→ Searches Pittsburgh MCP for equivalent service request data
+→ Searches Seattle Open Data MCP for equivalent service request data
 → Normalizes by population; reports with comparability caveats
 
 ### Multi-City Benchmark
 ```
-"Compare Boston, Pittsburgh, and San Jose on building permit approval times 
+"Compare Boston, San Francisco, Seattle, and DC on building permit approval times 
 and per-capita permit volume. What can Boston learn from the better performers?"
 ```
-→ Parallel queries across all three city MCPs
+→ Parallel queries across all four city MCPs
 → Normalization table with per-capita figures
 → Structural differences analysis
 → Peer learning recommendations labeled with confidence levels
@@ -190,21 +190,32 @@ and per-capita permit volume. What can Boston learn from the better performers?"
 ### Best-Practice Hunt
 ```
 "I want to know if any comparable cities have figured out how to improve 
-311 response times in lower-income neighborhoods. Look at what Pittsburgh 
-and San Jose have done and what their data shows."
+311 response times in lower-income neighborhoods. Look at what San Francisco, 
+Seattle, and DC have done and what their data shows."
 ```
-→ Searches Pittsburgh and San Jose MCPs for service request data
+→ Searches SF, Seattle, and DC MCPs for service request data
 → Searches web for policy context (what those cities actually did)
 → Returns benchmark table + policy narrative labeled as preliminary evidence
 
 ### Equity Benchmark
 ```
 "Is Boston's neighborhood-level equity gap in 311 response times worse or 
-better than Pittsburgh's? Use the most recent data available from both cities."
+better than DC's? Use the most recent data available from both cities."
 ```
-→ Neighborhood-level analysis in both cities
-→ Calculates equity gap metric (top vs. bottom quartile neighborhoods)
+→ Neighborhood/ward-level analysis in both cities
+→ Calculates equity gap metric (top vs. bottom quartile neighborhoods/wards)
 → Reports with structural context and comparability caveats
+
+### Performance Management Benchmark
+```
+"Compare Boston's cost-per-resolved-311-case and workload-per-employee to 
+San Francisco and Seattle. Use the Performance Management skill for Boston first, 
+then search for equivalent budget and payroll data in peer cities."
+```
+→ Runs Performance_Management_Skill.md Modules 1 and 2 for Boston first
+→ Searches SF and Seattle for equivalent budget/payroll/outcome data
+→ Computes normalized efficiency ratios for each city
+→ Reports findings with cost-of-living caveat and claim strength labels
 
 ---
 
@@ -224,12 +235,12 @@ for the Mayor's office."
 ```
 "The City Council is debating whether to reallocate Public Works crews 
 based on 311 demand data. Help me build the evidence case — analyze the 
-relevant Boston data, see how Pittsburgh handles this, and produce a policy 
-brief with honest pros and cons."
+relevant Boston data, see how Seattle and DC handle this, and produce a 
+policy brief with honest pros and cons."
 ```
 → Phase 1: Frame resource allocation question
 → Phase 2: Analyze Boston demand patterns, geographic distribution
-→ Phase 4: Pittsburgh comparison for crew allocation approaches
+→ Phase 4: Seattle and DC comparison for crew allocation approaches
 → Phase 3: Policy brief with recommendations, alternatives, limitations
 
 ### Neighborhood Equity Index

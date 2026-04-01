@@ -271,7 +271,7 @@ Step 11: Compute ratios → apply Evidence Synthesis Template
 
 Pass to other phases when relevant:
 - **→ `Analytical_Skill.md`** if equity analysis is needed (do outcomes vary by neighborhood relative to spending?)
-- **→ `Benchmarking_Skill.md`** if the user wants to compare Boston's efficiency ratios to Pittsburgh or San Jose
+- **→ `Benchmarking_Skill.md`** if the user wants to compare Boston's efficiency ratios to San Francisco, Seattle, or DC (see Performance Management Benchmarking module in that skill)
 - **→ `Communication_Skill.md`** when converting findings into a memo, brief, or dashboard
 
 ---

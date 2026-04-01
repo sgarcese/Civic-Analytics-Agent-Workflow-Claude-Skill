@@ -169,7 +169,7 @@ Use at two points: **before starting** (pre-flight ✈️) and **before deliveri
 **Analysis**
 - [ ] All metrics normalized by appropriate denominator
 - [ ] City population figures used for per-capita calculations
-  (Boston ~675K, Pittsburgh ~300K, San Jose ~1M)
+  (Boston ~675K, San Francisco ~870K, Seattle ~750K, DC ~690K)
 - [ ] Both absolute and per-capita numbers reported
 - [ ] Data source for each city cited (dataset ID + portal)
 

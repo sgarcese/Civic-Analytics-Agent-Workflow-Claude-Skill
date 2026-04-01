@@ -1,6 +1,6 @@
 ---
 name: city-analysis-workflow
-description: "Master workflow skill for City of Boston policy analysis and civic innovation. ALWAYS use this skill for any request involving Boston city data, city services, neighborhood equity, public policy, government performance, 311 analysis, housing, safety, transportation, or any civic issue — even if the user hasn't explicitly asked for a 'full analysis'. This skill orchestrates four sub-skills: city-problem-framing (Bloomberg-inspired), city-policy-analysis (J-PAL-inspired), city-communication (GovLab/InnovateUS-inspired), and city-benchmarking (cross-city comparison using Pittsburgh and San Jose data). Use this skill for: 'full analysis', 'policy brief', 'data-driven recommendation', 'city improvement project', 'investigate [issue]', 'compare Boston to other cities', 'what does the data show', 'help me write a memo about', or any request that combines problem definition, data analysis, and communication for government or civic purposes."
+description: "Master workflow skill for City of Boston policy analysis and civic innovation. ALWAYS use this skill for any request involving Boston city data, city services, neighborhood equity, public policy, government performance, 311 analysis, housing, safety, transportation, or any civic issue — even if the user hasn't explicitly asked for a 'full analysis'. This skill orchestrates five sub-skills: city-problem-framing (Bloomberg-inspired), city-policy-analysis (J-PAL-inspired), city-communication (GovLab/InnovateUS-inspired), city-benchmarking (cross-city comparison using San Francisco, Seattle, and DC data), and city-performance-management (Results for America / PerformanceStat). Use this skill for: 'full analysis', 'policy brief', 'data-driven recommendation', 'city improvement project', 'investigate [issue]', 'compare Boston to other cities', 'what does the data show', 'help me write a memo about', or any request that combines problem definition, data analysis, and communication for government or civic purposes."
 ---
 
 # City Policy Analysis — Master Orchestrator
@@ -12,7 +12,7 @@ description: "Master workflow skill for City of Boston policy analysis and civic
 | **1. FRAME** | Bloomberg Center for Public Innovation (JHU) | Problem is undefined or needs scoping | `Problem_Framing_Skill.md` |
 | **2. ANALYZE** | J-PAL, MIT — Evidence-to-Policy | Running numbers, finding patterns, equity analysis | `Analytical_Skill.md` |
 | **3. COMMUNICATE** | The GovLab (NYU) / InnovateUS | Writing memos, briefs, dashboards, community reports | `Communication_Skill.md` |
-| **4. BENCHMARK** | Cross-city comparison using Boston + Pittsburgh + San Jose data | Comparing Boston to peer cities, learning from elsewhere | `Benchmarking_Skill.md` |
+| **4. BENCHMARK** | Cross-city comparison using Boston + San Francisco + Seattle + DC data | Comparing Boston to peer cities, learning from elsewhere | `Benchmarking_Skill.md` |
 | **5. PERFORM** | Results for America / PerformanceStat (CitiStat) | Budget × staffing × service outcomes: cost-per-outcome, workload-per-FTE, efficiency trends | `Performance_Management_Skill.md` |
 
 > **Always read the relevant sub-skill file before beginning each phase.**
@@ -55,20 +55,30 @@ get_datastore_schema(resource_id)→ Get exact field names before querying
 query_datastore(resource_id, filters={}, sort="", limit=100, date_range={})
 ```
 
-### Pittsburgh Open Data (Benchmarking)
+### San Francisco Open Data (Benchmarking — Socrata)
 ```
-PGH Open Data MCP:ckan__search_datasets(query)
-PGH Open Data MCP:ckan__get_dataset(dataset_id)
-PGH Open Data MCP:ckan__get_schema(resource_id)
-PGH Open Data MCP:ckan__query_data(resource_id, ...)
+San Francisco Open Data:socrata__search_datasets(query)
+San Francisco Open Data:socrata__get_dataset(dataset_id)
+San Francisco Open Data:socrata__get_schema(resource_id)
+San Francisco Open Data:socrata__query_dataset(resource_id, ...)
+San Francisco Open Data:socrata__execute_sql(soql_query)
 ```
 
-### San Jose Open Data (Benchmarking)
+### Seattle Open Data (Benchmarking — Socrata)
 ```
-San Jose MCP:ckan__search_datasets(query)
-San Jose MCP:ckan__get_dataset(dataset_id)
-San Jose MCP:ckan__get_schema(resource_id)
-San Jose MCP:ckan__query_data(resource_id, ...)
+Seattle Open Data:socrata__search_datasets(query)
+Seattle Open Data:socrata__get_dataset(dataset_id)
+Seattle Open Data:socrata__get_schema(resource_id)
+Seattle Open Data:socrata__query_dataset(resource_id, ...)
+Seattle Open Data:socrata__execute_sql(soql_query)
+```
+
+### DC Open Data (Benchmarking — ArcGIS)
+```
+DC Open Data:arcgis__search_datasets(query)
+DC Open Data:arcgis__get_dataset(dataset_id)
+DC Open Data:arcgis__query_data(dataset_id, ...)
+DC Open Data:arcgis__get_aggregations(dataset_id, ...)
 ```
 
 **⚠️ ALWAYS confirm field names via schema before querying any dataset in any city.**
@@ -121,7 +131,7 @@ Key resource IDs: `dff4d804-...` (2024), `9d7c2214-...` (Jan–Oct 2025), `254ad
 | `Problem_Framing_Skill.md` | Bloomberg methodology: scope, stakeholders, assumptions |
 | `Analytical_Skill.md` | J-PAL methodology: descriptive → diagnostic → equity |
 | `Communication_Skill.md` | GovLab/InnovateUS: memos, briefs, dashboards, engagement |
-| `Benchmarking_Skill.md` | Cross-city comparison using Pittsburgh and San Jose data |
+| `Benchmarking_Skill.md` | Cross-city comparison using San Francisco, Seattle, and DC data; includes Performance Management Benchmarking module |
 | `TEMPLATES.md` | Fill-in-the-blank templates for 6 output types |
 | `CHECKLISTS.md` | Pre-flight and review checklists for all phases |
 | `PROMPTS.md` | Example prompts organized by phase and complexity |

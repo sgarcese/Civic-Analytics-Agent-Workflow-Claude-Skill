@@ -1,6 +1,6 @@
 ---
 name: worked-example-311-response-equity
-description: "End-to-end worked example demonstrating all four phases applied to: Are 311 response times equitable across Boston neighborhoods, and how does Boston compare to Pittsburgh? Uses real Boston Open Data field names and query patterns."
+description: "End-to-end worked example demonstrating all four phases applied to: Are 311 response times equitable across Boston neighborhoods, and how does Boston compare to Seattle? Uses real Boston Open Data field names and query patterns."
 ---
 
 # Worked Example: 311 Response Time Equity Analysis + Cross-City Benchmark
@@ -23,7 +23,7 @@ A City Councilor asks: *"My constituents in Mattapan feel like the city takes fo
 - "Fix things" — which service types? All 311 categories or specific ones?
 - "Takes forever" — total time to close? Time to first response?
 - "Compared to other neighborhoods" — which comparison is fair?
-- "Other cities" — Pittsburgh? San Jose? What metrics are comparable?
+- "Other cities" — Seattle? San Francisco? DC? What metrics are comparable?
 - What would explain differences? Volume? Complexity? Staffing? Geography?
 
 ### Stakeholder Map
@@ -109,52 +109,51 @@ Access equity check:
 
 ## PHASE 4: BENCHMARK (Cross-City Comparison)
 
-### Discover Pittsburgh's Equivalent Data
+### Discover Seattle's Equivalent Data
 ```
-PGH Open Data MCP:ckan__search_datasets("service requests")
-PGH Open Data MCP:ckan__search_datasets("311")
-→ Identify Pittsburgh's equivalent dataset
+Seattle Open Data:socrata__search_datasets("service requests")
+Seattle Open Data:socrata__search_datasets("customer service 311")
+→ Identify Seattle's equivalent dataset (FindIt FixIt or service request data)
 
-PGH Open Data MCP:ckan__get_schema(resource_id)
+Seattle Open Data:socrata__get_schema(resource_id)
 → Find equivalent fields for: case open date, case close date,
   on-time indicator or resolution time, request type, neighborhood/district
 ```
 
-### Discover San Jose's Equivalent Data
+### Discover DC's Equivalent Data
 ```
-San Jose MCP:ckan__search_datasets("service requests")
-San Jose MCP:ckan__search_datasets("constituent")
-→ Identify San Jose's equivalent dataset
+DC Open Data:arcgis__search_datasets("311 service requests")
+→ Identify DC's equivalent dataset (DC311/DCii data)
 
-San Jose MCP:ckan__get_schema(resource_id)
-→ Find equivalent fields
+DC Open Data:arcgis__get_dataset(dataset_id)
+→ Find field names and structure (ArcGIS syntax differs from Socrata)
 ```
 
 ### Cross-City Comparability Assessment
 
-| Dimension | Boston | Pittsburgh | San Jose |
-|-----------|--------|-----------|---------|
+| Dimension | Boston | Seattle | Washington DC |
+|-----------|--------|---------|--------------|
 | Metric | on_time field (ONTIME/OVERDUE) | [check schema] | [check schema] |
-| Population | ~675K | ~300K | ~1M |
+| Population | ~675K | ~750K | ~690K |
 | SLA definitions | Vary by request type | [verify] | [verify] |
-| Comparable? | — | Approximately | Partially |
+| Comparable? | — | Approximately | Approximately |
 
 ### Benchmark Summary
 
 ```
 CROSS-CITY BENCHMARK: 311 On-Time Performance
 
-City        On-Time Rate    Per 10K Requests    Period    Source
-──────────────────────────────────────────────────────────────
-Boston      [X%]            [normalized]         2024      data.boston.gov
-Pittsburgh  [Y%]            [normalized]         [period]  data.wprdc.org
-San Jose    [Z%]            [normalized]         [period]  data.sanjoseca.gov
+City            On-Time Rate    Per 10K Requests    Period    Source
+──────────────────────────────────────────────────────────────────
+Boston          [X%]            [normalized]         2024      data.boston.gov
+Seattle         [Y%]            [normalized]         [period]  data.seattle.gov
+Washington DC   [Z%]            [normalized]         [period]  opendata.dc.gov
 
 Comparability: Moderate — SLA definitions and request category definitions 
 differ across cities. Use as directional, not precise.
 ```
 
-**Appropriate claim:** "Boston's on-time rate is [X] percentage points [above/below] Pittsburgh's, though differences in SLA definitions mean this comparison is directional rather than precise."
+**Appropriate claim:** "Boston's on-time rate is [X] percentage points [above/below] Seattle's, though differences in SLA definitions mean this comparison is directional rather than precise."
 
 ---
 
@@ -173,14 +172,14 @@ BOTTOM LINE: Analysis of 2024 311 data confirms that Mattapan residents
 experience on-time completion rates X percentage points below the citywide 
 average. This pattern extends to [Y other neighborhoods] and likely reflects 
 systemic resource allocation, not neighborhood-specific factors. Boston's 
-on-time rate appears [above/below/comparable to] Pittsburgh's, though 
+on-time rate appears [above/below/comparable to] Seattle's, though 
 definitional differences limit direct comparison.
 
 [Continue with Key Findings, Equity Note, Recommendation, Requested Decision]
 ```
 
 **Output B: Policy Brief for City Council (3-5 pages)**
-Uses Policy Brief template from TEMPLATES.md. Include "What Other Cities Have Done" section with Pittsburgh/San Jose benchmark findings.
+Uses Policy Brief template from TEMPLATES.md. Include "What Other Cities Have Done" section with Seattle/DC benchmark findings.
 
 **Output C: Community Fact Sheet for Mattapan Residents**
 Uses Community Fact Sheet template. Plain language. Specific to Mattapan experience. Include feedback mechanism.
@@ -209,12 +208,12 @@ Uses Community Fact Sheet template. Plain language. Specific to Mattapan experie
 | 6 | Boston | `query_datastore(…, on_time="OVERDUE")` | Overdue count |
 | 7 | Boston | Repeat 4-6 for each comparison neighborhood | Comparison data |
 | 8 | Boston | `query_datastore(population_resource_id)` | Per-capita denominator |
-| 9 | Pittsburgh | `ckan__search_datasets("311 service requests")` | Find Pittsburgh data |
-| 10 | Pittsburgh | `ckan__get_schema(resource_id)` | Field names |
-| 11 | Pittsburgh | `ckan__query_data(resource_id, …)` | Pittsburgh metrics |
-| 12 | San Jose | `ckan__search_datasets("service requests")` | Find SJ data |
-| 13 | San Jose | `ckan__get_schema(resource_id)` | Field names |
-| 14 | San Jose | `ckan__query_data(resource_id, …)` | San Jose metrics |
+| 9 | Seattle | `socrata__search_datasets("service requests")` | Find Seattle data |
+| 10 | Seattle | `socrata__get_schema(resource_id)` | Field names |
+| 11 | Seattle | `socrata__query_dataset(resource_id, …)` | Seattle metrics |
+| 12 | DC | `arcgis__search_datasets("311 service requests")` | Find DC data |
+| 13 | DC | `arcgis__get_dataset(dataset_id)` | Field structure |
+| 14 | DC | `arcgis__query_data(dataset_id, …)` | DC metrics |
 
 ---
 
@@ -224,6 +223,6 @@ Uses Community Fact Sheet template. Plain language. Specific to Mattapan experie
 
 **Analysis (J-PAL):** Started descriptive before diagnostic. Checked whether service mix explains the gap before concluding systemic discrimination. Used explicit claim-strength language throughout. Included honest limitations.
 
-**Benchmarking:** Discovered Pittsburgh and San Jose data before comparing. Documented metric definitions to assess comparability. Reported differences as directional, not precise. Connected benchmarks to a specific investigable hypothesis for Boston.
+**Benchmarking:** Discovered Seattle and DC data before comparing. Documented metric definitions to assess comparability. Reported differences as directional, not precise. Connected benchmarks to a specific investigable hypothesis for Boston.
 
 **Communication (GovLab):** Three outputs for three audiences from the same analysis. Executive memo leads with bottom line. Community fact sheet uses plain language and invites participation. All cite data sources and acknowledge limitations. Engagement hooks built in.

@@ -1,6 +1,6 @@
 ---
 name: boston-data-reference
-description: "Quick reference for Boston Open Data datasets, field names, schema differences, and cross-referencing strategies. Also includes Pittsburgh and San Jose dataset discovery guides for benchmarking. Consult before any analysis to identify available data and plan cross-dataset or cross-city joins."
+description: "Quick reference for Boston Open Data datasets, field names, schema differences, and cross-referencing strategies. Also includes San Francisco, Seattle, and DC dataset discovery guides for benchmarking. Consult before any analysis to identify available data and plan cross-dataset or cross-city joins."
 ---
 
 # Boston Open Data — Quick Reference Guide
@@ -172,41 +172,68 @@ query_datastore("b0543358-d03f-4682-bf0c-658ea4573d6f", limit=30)
 
 ---
 
-## Pittsburgh Open Data — Key Datasets
+## San Francisco Open Data — Key Datasets
 
-Portal: https://data.wprdc.org
-MCP: `PGH Open Data MCP`
+Portal: https://data.sfgov.org
+MCP: `San Francisco Open Data` (Socrata)
 
-To discover datasets: `PGH Open Data MCP:ckan__search_datasets(query)`
+To discover datasets: `San Francisco Open Data:socrata__search_datasets(query)`
 
 | Topic | Search Terms | Notes |
 |-------|-------------|-------|
-| 311 / Service Requests | "311", "service requests", "constituent" | Pittsburgh has 311 data with similar fields |
-| Building Permits | "permits", "building permits" | Active permits dataset available |
-| Crime | "police", "crime", "incidents" | WPRDC hosts multiple public safety datasets |
-| Property | "property", "parcels", "assessments" | Allegheny County property data |
-| Demographics | "census", "population", "ACS" | Census-derived datasets |
+| 311 / Service Requests | "311 cases", "service requests" | SF311 case data; includes status and resolution fields |
+| Building Permits | "building permits" | Active building permits with approval dates |
+| Crime | "police incidents", "crime" | SFPD incident data |
+| Budget / Spending | "budget expenditure", "controller spending" | City Controller publishes detailed spending data |
+| Payroll / Staffing | "employee compensation", "payroll", "salaries" | Annual employee compensation data |
+| Demographics | "census", "population", "demographics" | ACS and city estimates |
+| Transportation | "bay wheels", "bike share", "traffic" | Mobility and transit datasets |
 
-**Pittsburgh Context:** ~300K residents; older Rust Belt infrastructure; significant neighborhood equity challenges; university-adjacent; Western PA climate; strong data portal from WPRDC (Western PA Regional Data Center).
+**San Francisco Context:** ~870K residents; dense urban; tech-sector economy; Socrata platform; strong civic data infrastructure; comparable union workforce; higher labor costs than Boston — normalize dollar figures before cross-city efficiency comparisons.
 
 ---
 
-## San Jose Open Data — Key Datasets
+## Seattle Open Data — Key Datasets
 
-Portal: https://data.sanjoseca.gov
-MCP: `San Jose MCP`
+Portal: https://data.seattle.gov
+MCP: `Seattle Open Data` (Socrata)
 
-To discover datasets: `San Jose MCP:ckan__search_datasets(query)`
+To discover datasets: `Seattle Open Data:socrata__search_datasets(query)`
 
 | Topic | Search Terms | Notes |
 |-------|-------------|-------|
-| Service Requests / 311 | "service requests", "constituent", "311" | Varies; check for "SJ311" or equivalent |
-| Building Permits | "building permits", "permits" | Active development data |
-| Crime | "crime", "police", "incidents" | San Jose Police Department datasets |
-| Transportation | "transportation", "bike", "transit" | Active mobility datasets |
-| Demographics | "census", "demographics", "population" | ACS and city-derived estimates |
+| Service Requests / 311 | "service requests", "customer service", "find it fix it" | Seattle's FindIt FixIt app generates service request data |
+| Building Permits | "building permits", "permits issued" | Active building permit data |
+| Crime | "crime data", "police report", "SPD" | Seattle Police Department data |
+| Budget / Spending | "budget", "expenditure", "spending" | City budget and spending datasets |
+| Payroll / Staffing | "payroll", "employee wages", "city employee" | Annual employee compensation |
+| Demographics | "census", "population", "demographics" | ACS and city estimates |
+| Transportation | "bike share", "transit", "transportation" | Mobility datasets |
 
-**San Jose Context:** ~1M residents; tech-sector economy; significant Vietnamese, Hispanic, and other immigrant populations; California regulatory environment; aggressive civic tech investment.
+**Seattle Context:** ~750K residents; tech-driven economy; Socrata platform; strong open data culture; Pacific Northwest climate affects infrastructure demands; comparable innovation economy to Boston.
+
+---
+
+## Washington DC Open Data — Key Datasets
+
+Portal: https://opendata.dc.gov
+MCP: `DC Open Data` (ArcGIS)
+
+To discover datasets: `DC Open Data:arcgis__search_datasets(query)`
+
+**Note:** DC uses ArcGIS — query syntax differs from Boston and Socrata-based cities. Use `arcgis__query_data` and `arcgis__get_aggregations` instead of `query_datastore` or `query_dataset`.
+
+| Topic | Search Terms | Notes |
+|-------|-------------|-------|
+| 311 / Service Requests | "311 service requests", "DC311" | DC311 (DCii) system data |
+| Building Permits | "building permits", "construction permits" | DCRA permit data |
+| Crime | "crime incidents", "MPD crime" | Metropolitan Police Department data |
+| Budget / Spending | "budget", "expenditure", "agency spending" | DC Office of the Chief Financial Officer data |
+| Payroll / Staffing | "payroll", "employee compensation" | Employee compensation data |
+| Demographics | "census", "population" | ACS and DC Office of Planning estimates |
+| Transportation | "capital bikeshare", "transportation" | Mobility and transit datasets |
+
+**DC Context:** ~690K residents; most similar population to Boston; city + state hybrid government (handles some functions other cities delegate to state/county); ArcGIS platform; sophisticated performance management culture (CitiStat model — Boston's CitiStat was modeled on DC's); federal government presence distorts some per-capita metrics.
 
 ---
 

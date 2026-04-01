@@ -271,30 +271,32 @@ Questions? Contact [name] at [email].
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 CROSS-CITY BENCHMARK: [METRIC] 
-Boston | Pittsburgh | San Jose — [Year/Period]
+Boston | San Francisco | Seattle | DC — [Year/Period]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 DATA SOURCES
- Boston:     [Dataset ID] | data.boston.gov
- Pittsburgh: [Dataset ID] | data.wprdc.org
- San Jose:   [Dataset ID] | data.sanjoseca.gov
+ Boston:        [Dataset ID] | data.boston.gov
+ San Francisco: [Dataset ID] | data.sfgov.org
+ Seattle:       [Dataset ID] | data.seattle.gov
+ Washington DC: [Dataset ID] | opendata.dc.gov
 
 ───────────────────────────────────────────────────
 
 SUMMARY TABLE
 
- City         Raw Value    Per 10K Residents    Period
- ─────────────────────────────────────────────────────
- Boston       [value]      [value]              [dates]
- Pittsburgh   [value]      [value]              [dates]
- San Jose     [value]      [value]              [dates]
+ City             Raw Value    Per 10K Residents    Period
+ ────────────────────────────────────────────────────────
+ Boston           [value]      [value]              [dates]
+ San Francisco    [value]      [value]              [dates]
+ Seattle          [value]      [value]              [dates]
+ Washington DC    [value]      [value]              [dates]
 
 ───────────────────────────────────────────────────
 
 HOW BOSTON COMPARES
 [1-2 sentences using appropriate hedged language:
- "Boston's [metric] is [X] percentage points [higher/lower] than Pittsburgh's..."]
+ "Boston's [metric] is [X] percentage points [higher/lower] than Seattle's..."]
 
 ───────────────────────────────────────────────────
 
@@ -350,7 +352,7 @@ Slide 8: EQUITY LENS
  [Who benefits, who is burdened]
 
 Slide 9: PEER CITY CONTEXT (if applicable)
- [What Pittsburgh or San Jose does differently]
+ [What San Francisco, Seattle, or DC does differently]
  [Labeled as preliminary evidence, not proven model]
 
 Slide 10: WHAT WE DON'T KNOW

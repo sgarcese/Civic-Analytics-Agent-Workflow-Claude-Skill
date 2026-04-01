@@ -201,6 +201,6 @@ Level 2 and 3 get the most weight because they test the core use case — accura
 
 - [ ] Convert this plan into `evals.json` format for automated grading
 - [ ] Add Level 5: Natural language questions that require the MCP to infer which dataset to use (e.g., "Is Boston getting safer?" requires choosing crime data and comparing years)
-- [ ] Add cross-city benchmarking evals using Pittsburgh and San Jose MCP servers
+- [ ] Add cross-city benchmarking evals using San Francisco, Seattle, and DC MCP servers
 - [ ] Add edge-case evals: empty results, malformed filters, nonexistent neighborhoods
 - [ ] Add latency/performance benchmarks
