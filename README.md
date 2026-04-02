@@ -14,14 +14,15 @@ Each skill encodes a proven methodology and handles the mechanics of data discov
 
 ---
 
-## The Four-Phase Framework
+## The Five-Phase Framework
 
 | Phase | Skill File | Methodology | Core Question |
 |-------|-----------|-------------|--------------|
 | **1. Frame** | `Problem_Framing_Skill.md` | Bloomberg Centers (JHU & HKS) | Are we solving the right problem? |
 | **2. Analyze** | `Analytical_Skill.md` | J-PAL at MIT | What does the evidence actually show? |
 | **3. Communicate** | `Communication_Skill.md` | The GovLab (NYU & Northeastern) | Who needs to know what, in what format? |
-| **4. Benchmark** | `Benchmarking_Skill.md` | Cross-city comparison | Is this a Boston problem or every city's problem? |
+| **4. Benchmark** | `Benchmarking_Skill.md` | Cross-city comparison (SF, Seattle, DC) | Is this a Boston problem or every city's problem? |
+| **5. Perform** | `Performance_Management_Skill.md` | Results for America / PerformanceStat | Are we getting results for our investment? |
 
 The master orchestrator (`SKILL.md`) routes automatically between phases based on your request. You can run a single phase or the full workflow end-to-end.
 
@@ -41,6 +42,9 @@ Data collaboratives, collective intelligence, consequential engagement, democrat
 **InnovateUS**
 Accessible public communication, co-design methodology, plain-language standards. Bridges the gap between expert findings and community understanding.
 
+**Results for America / PerformanceStat (CitiStat)**
+Budget × staffing × service outcomes. Connects actual expenditures and employee headcount to delivered results. Surfaces cost-per-outcome, workload-per-FTE, and multi-year efficiency trends to ground investment decisions in evidence.
+
 ---
 
 ## Data Sources
@@ -54,7 +58,7 @@ Skills connect to open government data via MCP servers — no manual downloads, 
 | **Seattle** | Peer benchmarking | Seattle Open Data | Socrata |
 | **Washington DC** | Peer benchmarking | DC Open Data | ArcGIS |
 
-Boston coverage includes: 311 service requests, building permits, public safety, demographics, housing, transportation, and environment datasets. SF, Seattle, and DC were selected as peers for comparable population scale, urban density, and data infrastructure depth.
+Boston coverage includes: 311 service requests, building permits, public safety, demographics, housing, transportation, environment, operating budget, and employee earnings. SF, Seattle, and DC were selected as peers for comparable population scale, urban density, and data infrastructure depth.
 
 ---
 
@@ -62,17 +66,18 @@ Boston coverage includes: 311 service requests, building permits, public safety,
 
 ```
 .
-├── SKILL.md                    # Master orchestrator — start here
-├── Problem_Framing_Skill.md    # Phase 1: Bloomberg methodology
-├── Analytical_Skill.md         # Phase 2: J-PAL evidence framework
-├── Communication_Skill.md      # Phase 3: GovLab/InnovateUS methods
-├── Benchmarking_Skill.md       # Phase 4: Cross-city comparison
-├── TEMPLATES.md                # 6 fill-in-the-blank output formats
-├── CHECKLISTS.md               # Pre-flight & review checklists
-├── PROMPTS.md                  # 25+ example prompts by complexity
-├── REFERENCE.md                # Dataset catalog, field names, schema guide
-├── EXAMPLE-311-equity.md       # Complete worked example end-to-end
-└── Index.html                  # Project overview page
+├── SKILL.md                         # Master orchestrator — start here
+├── Problem_Framing_Skill.md         # Phase 1: Bloomberg methodology
+├── Analytical_Skill.md              # Phase 2: J-PAL evidence framework
+├── Communication_Skill.md           # Phase 3: GovLab/InnovateUS methods
+├── Benchmarking_Skill.md            # Phase 4: Cross-city comparison (SF, Seattle, DC)
+├── Performance_Management_Skill.md  # Phase 5: Results for America / PerformanceStat
+├── TEMPLATES.md                     # 6 fill-in-the-blank output formats
+├── CHECKLISTS.md                    # Pre-flight & review checklists
+├── PROMPTS.md                       # 25+ example prompts by complexity
+├── REFERENCE.md                     # Dataset catalog, field names, schema guide
+├── EXAMPLE-311-equity.md            # Complete worked example end-to-end
+└── index.html                       # Project overview page
 ```
 
 ---
@@ -108,6 +113,10 @@ Flag any equity concerns."
 # Cross-city benchmark
 "Compare Boston, San Francisco, Seattle, and DC on 311 closure rates.
 What can Boston learn from the better performers?"
+
+# Performance management
+"What is Boston's cost per resolved 311 case in Public Works for FY25?
+How does workload per employee compare to San Francisco?"
 
 # Communication package
 "Write a 1-page memo for the Mayor AND a community fact sheet for
@@ -147,9 +156,11 @@ The Boston 311 system changed in October 2025. Field names differ between legacy
 
 ## Supporting Materials
 
+**[`Performance_Management_Skill.md`](Performance_Management_Skill.md)** — Phase 5 skill. Connects budget expenditures, employee headcount, and service outcomes to compute cost-per-outcome, workload-per-FTE, and multi-year efficiency trends. Also the foundation for cross-city performance benchmarking via `Benchmarking_Skill.md`.
+
 **[`TEMPLATES.md`](TEMPLATES.md)** — Six fill-in-the-blank output formats: executive memo, policy brief, one-pager, community fact sheet, benchmark summary, and presentation deck.
 
-**[`CHECKLISTS.md`](CHECKLISTS.md)** — Pre-flight and review checklists for all four phases. Catches the most common analytical errors before they reach stakeholders.
+**[`CHECKLISTS.md`](CHECKLISTS.md)** — Pre-flight and review checklists for all five phases. Catches the most common analytical errors before they reach stakeholders.
 
 **[`PROMPTS.md`](PROMPTS.md)** — 25+ example prompts organized from simple single-query requests to complex multi-phase policy projects.
 
@@ -165,4 +176,4 @@ MIT License — open source, public domain data.
 
 ---
 
-*Built with Claude · Methodologies from Bloomberg Centers, J-PAL, The GovLab, and InnovateUS*
+*Built with Claude · Methodologies from Bloomberg Centers, J-PAL, The GovLab, InnovateUS, and Results for America*
