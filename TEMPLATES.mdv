@@ -1,4 +1,4 @@
----
+v---
 name: output-templates
 description: "Fill-in-the-blank document templates for the six most common city analysis outputs. Replace [bracketed items] with actual content. Delete sections that don't apply."
 ---
